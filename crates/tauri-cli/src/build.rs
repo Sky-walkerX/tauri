@@ -160,7 +160,7 @@ pub fn setup(
       std::process::exit(1);
     } else {
       log::warn!(
-        "The bundle identifier \"{}\" set in `{} identifier` ends with `.app`. This is not recommended as it will cause issues on macOS.",
+        "The bundle identifier \"{}\" set in `{} identifier` ends with `.app`. This is not recommended because it conflicts with the application bundle extension on macOS.",
         config_.identifier,
         bundle_identifier_source
       );
