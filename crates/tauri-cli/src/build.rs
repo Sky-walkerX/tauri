@@ -157,7 +157,6 @@ pub fn setup(
       bundle_identifier_source
     );
   }
-  
 
   if let Some(before_build) = config_.build.before_build_command.clone() {
     helpers::run_hook("beforeBuildCommand", before_build, interface, options.debug)?;
