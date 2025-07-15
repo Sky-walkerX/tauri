@@ -40,4 +40,40 @@ impl super::WindowExt for tao::window::Window {
     let ns_window: &NSWindow = unsafe { &*self.ns_window().cast() };
     ns_window.center();
   }
+
+
+  fn set_simple_fullscreen(&self, enable: bool) {
+    let ns_window: &NSWindow = unsafe { &*self.ns_window().cast() };
+    let app = unsafe { objc2_app_kit::NSApplication::sharedApplication() };
+
+    unsafe {
+      if enable {
+        app.setMenuBarVisible(false);
+
+        ns_window.setStyleMask(NSWindowStyleMask::Borderless);
+
+        let behavior_flags = objc2_app_kit::NSWindowCollectionBehavior::FullScreenAuxiliary 
+                                        | objc2_app_kit::NSWindowCollectionBehavior::IgnoresCycle 
+                                        | objc2_app_kit::NSWindowCollectionBehavior::Stationary;
+        ns_window.setCollectionBehavior(behavior_flags);
+
+        ns_window.makeKeyAndOrderFront(None);
+
+      } else {
+        app.setMenuBarVisible(true);
+
+        ns_window.setStyleMask(
+            NSWindowStyleMask::Titled
+            | NSWindowStyleMask::Closable
+            | NSWindowStyleMask::Miniaturizable
+            | NSWindowStyleMask::Resizable
+        );
+
+        ns_window.setCollectionBehavior(objc2_app_kit::NSWindowCollectionBehavior::Managed);
+
+        ns_window.orderFront(None); 
+      }
+    }
+  }
+
 }
