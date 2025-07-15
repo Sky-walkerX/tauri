@@ -49,6 +49,10 @@ pub trait WindowExt {
     >,
     background_color: Option<tao::window::RGBA>,
   );
+
+  /// - **Linux / Windows / Android / iOS**: Unsupported.
+  #[cfg(target_os = "macos")]
+  fn set_simple_fullscreen(&self, enable: bool);
 }
 
 #[cfg(mobile)]
