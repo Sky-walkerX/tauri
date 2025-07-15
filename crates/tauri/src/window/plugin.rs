@@ -148,15 +148,17 @@ mod desktop_commands {
   setter!(set_theme, Option<Theme>);
   setter!(set_enabled, bool);
 
-   #[command(root = "crate")]
-   #[cfg(target_os = "macos")] 
-   pub async fn set_simple_fullscreen<R: Runtime>(
-       window: Window<R>,
-       label: Option<String>,
-       enable: bool,
-   ) -> crate::Result<()> {
-       get_window(window, label)?.set_simple_fullscreen(enable).map_err(Into::into)
-   }
+  #[command(root = "crate")]
+  #[cfg(target_os = "macos")]
+  pub async fn set_simple_fullscreen<R: Runtime>(
+    window: Window<R>,
+    label: Option<String>,
+    enable: bool,
+  ) -> crate::Result<()> {
+    get_window(window, label)?
+      .set_simple_fullscreen(enable)
+      .map_err(Into::into)
+  }
 
   #[command(root = "crate")]
   #[cfg(target_os = "windows")]

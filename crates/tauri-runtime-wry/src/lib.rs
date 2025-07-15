@@ -2200,7 +2200,6 @@ impl<T: UserEvent> WindowDispatch<T> for WryWindowDispatcher<T> {
     )
   }
 
-
   fn set_focus(&self) -> Result<()> {
     send_user_message(
       &self.context,
