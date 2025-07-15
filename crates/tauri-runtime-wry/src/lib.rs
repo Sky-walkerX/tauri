@@ -1348,7 +1348,7 @@ pub enum WindowMessage {
   SetSizeConstraints(WindowSizeConstraints),
   SetPosition(Position),
   SetFullscreen(bool),
-  #[cfg(target_os = "macos")] 
+  #[cfg(target_os = "macos")]
   SetSimpleFullscreen(bool),
   SetFocus,
   SetIcon(TaoWindowIcon),

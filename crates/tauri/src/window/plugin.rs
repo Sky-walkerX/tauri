@@ -148,28 +148,22 @@ mod desktop_commands {
   setter!(set_theme, Option<Theme>);
   setter!(set_enabled, bool);
 
-   #[command(root = "crate")]
-   pub async fn set_simple_fullscreen<R: Runtime>(
-       window: Window<R>,
-       label: Option<String>,
-       enable: bool,
-   ) -> crate::Result<()> {
-       #[cfg(not(target_os = "macos"))]
-       return Err(crate::Error::UnsupportedPlatform(
-           "set_simple_fullscreen is only supported on macOS".to_string(),
-       ));
+  #[command(root = "crate")]
+  pub async fn set_simple_fullscreen<R: Runtime>(
+    window: Window<R>,
+    label: Option<String>,
+    enable: bool,
+  ) -> crate::Result<()> {
+    #[cfg(not(target_os = "macos"))]
+    return Err(crate::Error::UnsupportedPlatform(
+      "set_simple_fullscreen is only supported on macOS".to_string(),
+    ));
 
-       #[cfg(target_os = "macos")]
-       get_window(window, label)?.set_simple_fullscreen(enable).map_err(Into::into)
-   }
-
-     return Err(crate::Error::UnsupportedPlatform(
-         "set_simple_fullscreen is only supported on macOS".to_string(),
-     ));
-
-     #[cfg(target_os = "macos")]
-     get_window(window, label)?.set_simple_fullscreen(enable).map_err(Into::into)
- }
+    #[cfg(target_os = "macos")]
+    get_window(window, label)?
+      .set_simple_fullscreen(enable)
+      .map_err(Into::into)
+  }
 
   #[command(root = "crate")]
   #[cfg(target_os = "windows")]
@@ -325,7 +319,7 @@ pub fn init<R: Runtime>() -> TauriPlugin<R> {
         desktop_commands::set_position,
         desktop_commands::set_fullscreen,
         #[cfg(target_os = "macos")]
-        desktop_commands::set_simple_fullscreen, 
+        desktop_commands::set_simple_fullscreen,
         desktop_commands::set_focus,
         desktop_commands::set_enabled,
         desktop_commands::set_skip_taskbar,

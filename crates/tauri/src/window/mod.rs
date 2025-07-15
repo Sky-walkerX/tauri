@@ -1963,11 +1963,11 @@ tauri::Builder::default()
 
   #[cfg(target_os = "macos")]
   pub fn set_simple_fullscreen(&self, enable: bool) -> crate::Result<()> {
-      self
-       .window
-       .dispatcher
-       .set_simple_fullscreen(enable)
-       .map_err(Into::into)
+    self
+      .window
+      .dispatcher
+      .set_simple_fullscreen(enable)
+      .map_err(Into::into)
   }
 
   /// Bring the window to front and focus.
