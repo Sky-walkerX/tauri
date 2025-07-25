@@ -40,9 +40,4 @@ impl super::WindowExt for tao::window::Window {
     let ns_window: &NSWindow = unsafe { &*self.ns_window().cast() };
     ns_window.center();
   }
-
-  #[cfg(target_os = "macos")]
-  fn set_simple_fullscreen(&self, enable: bool) {
-    self.set_simple_fullscreen(enable)
-  }
 }
